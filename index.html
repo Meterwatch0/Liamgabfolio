@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Liam Gabriel D. Bayot | Professional Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a1628;
+      font-family: 'Inter', 'Segoe UI', 'Poppins', system-ui, sans-serif;
+      color: #2d3748;
+      line-height: 1.6;
+      min-height: 100vh;
+      background-image: linear-gradient(135deg, #0b1a30 0%, #0f2440 30%, #162d50 100%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(250, 204, 21, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* WELCOME OVERLAY */
+    .welcome-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0b1a30 0%, #0f2440 40%, #162d50 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .welcome-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .welcome-content {
+      text-align: center;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .welcome-avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #facc15;
+      box-shadow: 0 0 50px rgba(250, 204, 21, 0.5), 0 15px 30px rgba(0,0,0,0.5);
+      margin-bottom: 1.5rem;
+      animation: pulse 2s infinite;
+      background: #1e3a8a;
+    }
+
+    .welcome-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+      text-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+    }
+
+    .welcome-subtitle {
+      font-size: 1.4rem;
+      color: #facc15;
+      font-weight: 500;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .explore-btn {
+      background: #facc15;
+      border: none;
+      padding: 1rem 3rem;
+      border-radius: 3rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 30px rgba(250, 204, 21, 0.4);
+      animation: bounceIn 1s ease;
+      border: 2px solid #fbbf24;
+    }
+
+    .explore-btn:hover {
+      background: #ffffff;
+      color: #1e3a8a;
+      box-shadow: 0 0 50px rgba(250, 204, 21, 0.8);
+      transform: translateY(-3px);
+      border-color: #ffffff;
+    }
+
+    .explore-btn i {
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+
+    .explore-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    .welcome-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .welcome-dots span {
+      width: 10px;
+      height: 10px;
+      background: #facc15;
+      border-radius: 50%;
+      animation: dotPulse 1.5s infinite;
+    }
+
+    .welcome-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .welcome-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.5); }
+      70% { box-shadow: 0 0 0 25px rgba(250, 204, 21, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(250, 204, 21, 0); }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* MAIN PORTFOLIO */
+    .main-content {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .portfolio {
+      max-width: 1280px;
+      width: 100%;
+      background: rgba(235, 240, 248, 0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 2.4rem;
+      padding: 2.8rem 2.4rem;
+      box-shadow: 0 30px 55px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(148, 163, 184, 0.4);
+      border: 1px solid rgba(203, 213, 225, 0.5);
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .profile-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2.2rem;
+      margin-bottom: 2.8rem;
+      background: linear-gradient(105deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+      border-radius: 2.2rem;
+      padding: 2rem 2.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(59, 130, 246, 0.25);
+      color: white;
+    }
+
+    .profile-pic {
+      width: 135px;
+      height: 135px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #facc15;
+      box-shadow: 0 0 30px rgba(250, 204, 21, 0.45), 0 12px 24px rgba(0,0,0,0.4);
+      background: #1e3a8a;
+    }
+
+    .profile-info h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.2rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 0.35rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-right: 0.8rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .badge.yellow {
+      background: #facc15;
+      color: #1e3a8a;
+      border: 1px solid #fbbf24;
+      font-weight: 600;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-row a, .contact-row span {
+      color: #ffffff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 0.45rem 1.2rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: 0.2s;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .contact-row a:hover {
+      background: #facc15;
+      border-color: #facc15;
+      color: #1e3a8a;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1.4rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #facc15;
+      color: #1e3a8a;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      letter-spacing: -0.2px;
+    }
+    .section-title i {
+      color: #facc15;
+      font-size: 1.5rem;
+      background: #1e3a8a;
+      padding: 0.5rem;
+      border-radius: 0.8rem;
+    }
+
+    .gallery-btn-wrap {
+      display: flex;
+      justify-content: flex-start;
+      margin: 1.5rem 0 1rem;
+    }
+    .professional-btn {
+      background: #1e3a8a;
+      border: 2px solid #facc15;
+      padding: 0.8rem 2.4rem;
+      border-radius: 2.5rem;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #f8fafc;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: 0.25s;
+      letter-spacing: 0.4px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2), 0 0 15px rgba(250,204,21,0.25);
+    }
+    .professional-btn:hover {
+      background: #facc15;
+      border-color: #1e3a8a;
+      color: #1e3a8a;
+      box-shadow: 0 0 28px rgba(250,204,21,0.6);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.4rem 0 1rem;
+    }
+    .gallery-item {
+      aspect-ratio: 1/1;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid #cbd5e1;
+      background: #e2e8f0;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: 0.3s;
+    }
+    .gallery-item:hover {
+      border-color: #facc15;
+      box-shadow: 0 0 22px rgba(250,204,21,0.45);
+      transform: scale(1.02);
+    }
+
+    .work-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
+    .work-card {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 1.5rem;
+      padding: 1.3rem 1.6rem;
+      flex: 1 1 280px;
+      transition: 0.2s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+      border-left: 5px solid #3b82f6;
+    }
+    .work-card:hover {
+      border-color: #facc15;
+      border-left-color: #facc15;
+      background: #f8fafc;
+      box-shadow: 0 12px 25px rgba(250,204,21,0.12);
+    }
+    .work-card h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 0.25rem;
+    }
+    .work-card .meta {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+    .work-card p {
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .org-grid, .webinar-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+    }
+    .org-tag {
+      background: #f1f5f9;
+      border: 1px solid #94a3b8;
+      border-radius: 2rem;
+      padding: 0.5rem 1.3rem;
+      font-size: 0.9rem;
+      color: #1e3a8a;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .org-tag:hover {
+      background: #fef9c3;
+      border-color: #facc15;
+    }
+
+    .thesis-highlight {
+      background: #e2e8f0;
+      border-left: 5px solid #facc15;
+      padding: 0.9rem 1.6rem;
+      border-radius: 0 1.2rem 1.2rem 0;
+      margin: 1rem 0 1.8rem;
+      color: #1e3a8a;
+      font-weight: 500;
+    }
+
+    .lightbox {
+      display: none; position: fixed; top:0; left:0; width:100%; height:100%;
+      background: rgba(15, 23, 42, 0.94); backdrop-filter: blur(18px);
+      align-items: center; justify-content: center; z-index: 2000;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90%; max-height: 85vh; border-radius: 2rem;
+      border: 4px solid #facc15;
+    }
+    .close-btn {
+      position: absolute; top: 2rem; right: 2.5rem; font-size: 2.4rem;
+      color: #1e3a8a; background: #facc15; width: 55px; height: 55px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: 2px solid #e2e8f0; font-weight: bold;
+    }
+
+    @media (max-width: 650px) {
+      .portfolio { padding: 1.5rem; }
+      .profile-section { flex-direction: column; text-align: center; }
+      .welcome-title { font-size: 2rem; }
+      .contact-row { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- WELCOME OVERLAY -->
+  <div class="welcome-overlay" id="welcomeOverlay">
+    <div class="welcome-content">
+      <img src="profile.jpg" alt="Liam Gabriel" class="welcome-avatar" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'130\' height=\'130\'%3E%3Crect width=\'130\' height=\'130\' fill=\'%231e3a8a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23facc15\' font-size=\'22\' font-weight=\'bold\'%3ELGB%3C/text%3E%3C/svg%3E';">
+      <h1 class="welcome-title">Hi, I'm Liam Gabriel</h1>
+      <p class="welcome-subtitle">Welcome to my  portfolio</p>
+      <button class="explore-btn" id="exploreBtn">
+        Explore Now <i class="fas fa-arrow-right"></i>
+      </button>
+      <div class="welcome-dots">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PORTFOLIO CONTENT -->
+  <div class="main-content" id="mainContent">
+    <div class="portfolio">
+      
+      <!-- Profile Header -->
+      <div class="profile-section">
+        <img src="profile.jpg" alt="Liam Bayot" class="profile-pic" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'135\' height=\'135\'%3E%3Crect width=\'135\' height=\'135\' fill=\'%231e3a8a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23facc15\' font-size=\'20\' font-weight=\'bold\'%3ELGB%3C/text%3E%3C/svg%3E';">
+        <div class="profile-info">
+          <h1>Liam Gabriel D. Bayot</h1>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.5rem 0 0.3rem;">
+            <span class="badge"><i class="fas fa-map-marker-alt"></i> Magalang, Pampanga</span>
+            <span class="badge yellow"><i class="fas fa-graduation-cap"></i> BS Information Technology</span>
+            <span class="badge">PSAU</span>
+          </div>
+          <div class="contact-row">
+            <span><i class="fas fa-phone-alt"></i> 09185340370</span>
+            <a href="mailto:liamgabriel149@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+            <a href="https://surl.li/mjbrae" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            <a href="https://www.facebook.com/liamgabriel.bayot" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thesis -->
+      <div class="thesis-highlight">
+        <i class="fas fa-microchip" style="color:#facc15; margin-right:0.5rem;"></i> 
+        <strong>Thesis:</strong> "IOT-Based Household Real-Time Water Consumption Management System"
+      </div>
+
+      <!-- Gallery Button -->
+      <div class="gallery-btn-wrap">
+        <button class="professional-btn" id="showGalleryBtn">
+          <i class="fas fa-images"></i> click here to view my Graphic/Pubmuts design <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+      <div id="galleryContainer" style="display: none;">
+        <div class="gallery-grid" id="imageGrid"></div>
+      </div>
+
+      <!-- Work Experience -->
+      <div class="section-title"><i class="fas fa-briefcase"></i> Professional Experience & Technical Skills</div>
+      <div class="work-list">
+        <div class="work-card"><h4>Technical Program Operator</h4><div class="meta">2023–2026</div><p>Managed AV systems, live troubleshooting, event execution.</p></div>
+        <div class="work-card"><h4>School Events Organizer</h4><p>Planned cultural programs, workshops, technical exhibitions.</p></div>
+        <div class="work-card"><h4>Video Editor & Photographer</h4><p>Highlight reels, color correction, storytelling, social media.</p></div>
+        <div class="work-card"><h4>Dance Choreographer</h4><p>Routines, stage performances, dancer coordination.</p></div>
+        <div class="work-card"><h4>Software Programmer</h4><p>Python, automation scripts, logic building.</p></div>
+        <div class="work-card"><h4>Arduino Hardware Programmer</h4><p>Sensors, motors, embedded systems, robotics.</p></div>
+        <div class="work-card"><h4>Networking & Wi-Fi Systems</h4><p>Installation, configuration, troubleshooting.</p></div>
+        <div class="work-card"><h4>Electrical & Industrial Maintenance</h4><p>EIM, preventive/corrective maintenance.</p></div>
+        <div class="work-card"><h4>Computer Hardware & Software</h4><p>OS setup, repair, desktop/laptop maintenance.</p></div>
+        <div class="work-card"><h4>Machine Learning</h4><p>Data handling, predictive models, beginner projects.</p></div>
+        <div class="work-card"><h4>Graphic & Pub Mats Design</h4><p>Posters, social media, promotional layouts.</p></div>
+        <div class="work-card"><h4>Database Manager</h4><div class="meta">Municipality of Magalang</div><p>Data accuracy, reports, backups, government compliance.</p></div>
+      </div>
+
+      <!-- Organizations -->
+      <div class="section-title"><i class="fas fa-users"></i> Leadership & Affiliations</div>
+      <div class="org-grid">
+        <span class="org-tag">ACES Business Manager 2023-2024</span>
+        <span class="org-tag">ACES President 2024-2025</span>
+        <span class="org-tag">SSC Board of Director 2024-2025</span>
+        <span class="org-tag">One Health Club Vice President 2024-2025</span>
+        <span class="org-tag">One Health Club President 2025-2026</span>
+        <span class="org-tag">Anti-illegal drugs Member 2024-2026</span>
+        <span class="org-tag">ACES Vice President 2025-2026</span>
+      </div>
+
+      <!-- Webinars -->
+      <div class="section-title"><i class="fas fa-chalkboard-teacher"></i> Professional Development & Webinars</div>
+      <div class="webinar-grid">
+        <span class="org-tag">OG Pinas – Royce Hotel 2024</span>
+        <span class="org-tag">The Art of Saying No – Anti-drugs Training</span>
+        <span class="org-tag">CARES – Antimicrobial Stewardship 2024</span>
+        <span class="org-tag">Turning Ideas into Impact – IT Research 2024</span>
+        <span class="org-tag">IP in Research Extension – Nov 2025</span>
+        <span class="org-tag">Positive Psychology – DMMMSU 2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="close-btn" id="closeLightbox">&times;</span>
+    <img src="" alt="Gallery" id="lightboxImg">
+  </div>
+
+  <script>
+    (function() {
+      const welcomeOverlay = document.getElementById('welcomeOverlay');
+      const exploreBtn = document.getElementById('exploreBtn');
+      const mainContent = document.getElementById('mainContent');
+      const galleryContainer = document.getElementById('galleryContainer');
+      const showBtn = document.getElementById('showGalleryBtn');
+      const imageGrid = document.getElementById('imageGrid');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('closeLightbox');
+
+      // Welcome screen transition
+      exploreBtn.addEventListener('click', () => {
+        welcomeOverlay.classList.add('hidden');
+        mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      });
+
+      welcomeOverlay.addEventListener('click', (e) => {
+        if (e.target === welcomeOverlay) {
+          welcomeOverlay.classList.add('hidden');
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 100);
+        }
+      });
+
+      function generateGallery() {
+        imageGrid.innerHTML = '';
+        for (let i = 1; i <= 20; i++) {
+          const imgSrc = `${i}.png`;
+          const fallbackSrc = `${i}.jpg`;
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'gallery-item';
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = `Portfolio ${i}`;
+          img.loading = 'lazy';
+          img.onerror = function() {
+            if (this.src.endsWith('.png')) {
+              this.src = fallbackSrc;
+            } else {
+              this.style.display = 'none';
+              itemDiv.style.background = '#cbd5e1';
+              itemDiv.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; height:100%; font-size:1.8rem; color:#1e3a8a; font-weight:bold;">${i}</div>`;
+            }
+          };
+          itemDiv.appendChild(img);
+          itemDiv.addEventListener('click', () => {
+            const clickedImg = itemDiv.querySelector('img');
+            if (clickedImg.style.display === 'none') {
+              alert(`Image ${i} not available.`);
+              return;
+            }
+            lightboxImg.src = clickedImg.src;
+            lightbox.classList.add('active');
+          });
+          imageGrid.appendChild(itemDiv);
+        }
+      }
+
+      showBtn.addEventListener('click', () => {
+        if (galleryContainer.style.display === 'none' || galleryContainer.style.display === '') {
+          galleryContainer.style.display = 'block';
+          showBtn.innerHTML = '<i class="fas fa-times-circle"></i> Hide Gallery <i class="fas fa-chevron-up"></i>';
+          if (imageGrid.children.length === 0) generateGallery();
+        } else {
+          galleryContainer.style.display = 'none';
+          showBtn.innerHTML = '<i class="fas fa-images"></i> View Portfolio Gallery <i class="fas fa-chevron-down"></i>';
+        }
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightboxImg.src = '';
+      }
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    })();
+  </script>
+</body>
+</html>
