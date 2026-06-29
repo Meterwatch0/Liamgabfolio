@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>About · Liam Gabriel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F4F2F2;
+      color: #1D2128;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      object-fit: cover;
+      opacity: 0.2;
+      filter: brightness(0.7) saturate(0.9);
+    }
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(244, 242, 242, 0.88);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      background: #1D2128;
+      margin: 0 -2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      opacity: 0;
+      animation: navFade 0.8s ease 0.2s forwards;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+    @keyframes navFade {
+      0% {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      color: #F4F2F2;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .logo i {
+      color: #408175;
+      font-size: 1.2rem;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      color: #F4F2F2;
+      text-decoration: none;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      opacity: 0.8;
+    }
+    .nav-links a:hover {
+      color: #408175;
+      border-bottom-color: #408175;
+      opacity: 1;
+    }
+    .nav-cta {
+      background: #F4F2F2;
+      color: #1D2128;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-cta:hover {
+      background: #408175;
+      color: #F4F2F2;
+      transform: scale(1.02);
+    }
+
+    .hero-header {
+      margin: 2.5rem 0 1.5rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease 0.3s forwards;
+    }
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-header .badge {
+      display: inline-block;
+      background: rgba(64, 129, 117, 0.12);
+      color: #408175;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid rgba(64, 129, 117, 0.15);
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+    .hero-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #1D2128;
+    }
+    .hero-header h1 span {
+      color: #408175;
+    }
+    .hero-header p {
+      font-size: 1.1rem;
+      color: #1D2128;
+      opacity: 0.7;
+      max-width: 560px;
+      margin-top: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 3rem;
+      margin: 1.5rem 0 2.5rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease 0.4s forwards;
+    }
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #408175;
+      letter-spacing: -0.02em;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: #1D2128;
+      opacity: 0.6;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 2rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease 0.5s forwards;
+    }
+
+    .profile-card {
+      background: #FFFFFF;
+      border-radius: 32px;
+      padding: 2rem 1.8rem;
+      border: 2px solid #1D2128;
+      transition: 0.3s;
+    }
+    .profile-card:hover {
+      border-color: #408175;
+      box-shadow: 0 16px 40px -8px rgba(64, 129, 117, 0.1);
+    }
+    .profile-card .avatar-sm {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #408175;
+      margin-bottom: 1rem;
+    }
+    .profile-card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #1D2128;
+      margin-bottom: 0.3rem;
+    }
+    .profile-card .role {
+      color: #408175;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .profile-card p {
+      color: #1D2128;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 0.8rem;
+    }
+    .profile-card .highlight {
+      color: #408175;
+      font-weight: 600;
+    }
+    .profile-card .divider {
+      border: none;
+      border-top: 2px solid #1D2128;
+      margin: 1.2rem 0;
+    }
+    .profile-card .info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #1D2128;
+      font-size: 0.9rem;
+      padding: 0.4rem 0;
+    }
+    .profile-card .info-row i {
+      color: #408175;
+      width: 1.4rem;
+      text-align: center;
+    }
+
+    .details-card {
+      background: #FFFFFF;
+      border-radius: 32px;
+      padding: 2rem 2rem;
+      border: 2px solid #1D2128;
+      transition: 0.3s;
+    }
+    .details-card:hover {
+      border-color: #408175;
+      box-shadow: 0 16px 40px -8px rgba(64, 129, 117, 0.1);
+    }
+    .details-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1D2128;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .details-card h3 i {
+      color: #408175;
+    }
+    .details-card p {
+      color: #1D2128;
+      opacity: 0.75;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .details-card .tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+    .details-card .tag {
+      background: rgba(64, 129, 117, 0.08);
+      color: #408175;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      border: 2px solid #1D2128;
+      font-weight: 500;
+    }
+    .details-card .tag:hover {
+      background: rgba(64, 129, 117, 0.15);
+      border-color: #408175;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+      color: #1D2128;
+      opacity: 0.6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .back-link:hover {
+      color: #408175;
+      border-bottom-color: #408175;
+      opacity: 1;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 4rem;
+      opacity: 0.4;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      color: #1D2128;
+    }
+
+    @media (max-width: 820px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-header h1 {
+        font-size: 2.4rem;
+      }
+      .stats-row {
+        gap: 2rem;
+        flex-wrap: wrap;
+      }
+      .container {
+        padding: 0 1.2rem 3rem;
+      }
+      .nav-bar {
+        padding: 0.8rem 1.2rem;
+        margin: 0 -1.2rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
+        justify-content: center;
+      }
+    }
+    @media (max-width: 480px) {
+      .hero-header h1 {
+        font-size: 2rem;
+      }
+      .stat-number {
+        font-size: 1.6rem;
+      }
+      .profile-card {
+        padding: 1.5rem;
+      }
+      .details-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="backgoundvideo.mp4" type="video/mp4" />
+  </video>
+  <div class="bg-overlay"></div>
+
+  <div class="container">
+    <nav class="nav-bar">
+      <div class="logo"><i class="fas fa-crown"></i> Liam.G</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="process.html">Process</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Say Hello!</a>
+    </nav>
+
+    <div class="hero-header">
+      <div class="badge"><i class="fas fa-code"></i> IT DEVELOPER</div>
+      <h1>I'm <span>Liam Gabriel</span> Bayot</h1>
+      <p>
+        Motivated IT professional with strong foundation in web development, system design,
+        and multimedia. I blend technical skills with creativity and leadership —
+        building immersive applications and IoT solutions.
+      </p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-item"><span class="stat-number">3+</span><span class="stat-label">Years Code</span></div>
+      <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Projects</span></div>
+      <div class="stat-item"><span class="stat-number">5</span><span class="stat-label">Org Roles</span></div>
+    </div>
+
+    <div class="about-grid">
+      <div class="profile-card">
+        <img src="profile.jpg" alt="Liam Gabriel" class="avatar-sm" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'80\' height=\'80\'%3E%3Crect width=\'80\' height=\'80\' fill=\'%23408175\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23F4F2F2\' font-size=\'28\' font-weight=\'bold\'%3ELGB%3C/text%3E%3C/svg%3E'" />
+        <h3>Liam Gabriel D. Bayot</h3>
+        <div class="role">IT Developer</div>
+        <hr class="divider" />
+        <div class="info-row"><i class="fas fa-graduation-cap"></i> BS IT · PSAU (2022–2026)</div>
+        <div class="info-row"><i class="fas fa-microchip"></i> Thesis: IoT-Based Real-Time Water Consumption</div>
+        <div class="info-row"><i class="fas fa-map-marker-alt"></i> Magalang, Pampanga</div>
+        <hr class="divider" />
+        <p>
+          <span class="highlight">Passionate</span> about web development, system design,
+          and IoT. I combine technical expertise with creative problem-solving to build
+          meaningful solutions.
+        </p>
+      </div>
+
+      <div class="details-card">
+        <h3><i class="fas fa-user-astronaut"></i> About &amp; Process</h3>
+        <p>
+          I'm an IT graduate from <span style="color:#408175; font-weight:600;">Pampanga State Agricultural University</span>
+          with a strong drive for innovation. My thesis focuses on an
+          <span style="color:#408175; font-weight:600;">IoT-based real-time water consumption management system</span>,
+          combining hardware sensors with a web dashboard for live monitoring.
+        </p>
+        <p>
+          I believe in <span style="color:#408175; font-weight:600;">clean code, clear communication, and continuous improvement</span>.
+          My process is structured yet flexible: <strong>Research → Wireframe → Develop → Test → Iterate</strong>.
+        </p>
+        <p style="margin-top:0.5rem;">
+          <strong>Leadership roles:</strong> ACES President, SSC Board Director, One Health President —
+          always aiming to foster growth and innovation.
+        </p>
+
+        <div class="tag-group">
+          <span class="tag">Full-Stack Dev</span>
+          <span class="tag">IoT Enthusiast</span>
+          <span class="tag">UI/UX Design</span>
+          <span class="tag">Creative Technologist</span>
+          <span class="tag">Team Leader</span>
+        </div>
+
+        <a href="process.html" style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.2rem; color:#408175; text-decoration:none; font-weight:500; border-bottom:2px solid transparent; transition:0.2s;"
+        onmouseover="this.style.borderBottomColor='#408175'"
+        onmouseout="this.style.borderBottomColor='transparent'">
+        Learn more about my process <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+  <div class="footer-note">
+    <i class="fas fa-crown" style="color:#408175;"></i> Liam Gabriel D. Bayot · built with purpose
+  </div>
+</div>
+</body>
+</html>

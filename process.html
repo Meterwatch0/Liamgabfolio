@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>My Process · Liam Gabriel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F4F2F2;
+      color: #1D2128;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -2;
+      object-fit: cover;
+      opacity: 0.2;
+      filter: brightness(0.7) saturate(0.9);
+    }
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: rgba(244, 242, 242, 0.88);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      background: #1D2128;
+      margin: 0 -2rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      opacity: 0;
+      animation: navFade 0.8s ease 0.2s forwards;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+    @keyframes navFade {
+      0% {
+        opacity: 0;
+        transform: translateY(-12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      color: #F4F2F2;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .logo i {
+      color: #408175;
+      font-size: 1.2rem;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      color: #F4F2F2;
+      text-decoration: none;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      opacity: 0.8;
+    }
+    .nav-links a:hover {
+      color: #408175;
+      border-bottom-color: #408175;
+      opacity: 1;
+    }
+    .nav-cta {
+      background: #F4F2F2;
+      color: #1D2128;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .nav-cta:hover {
+      background: #408175;
+      color: #F4F2F2;
+      transform: scale(1.02);
+    }
+
+    .page-header {
+      margin: 2.5rem 0 2rem;
+      opacity: 0;
+      animation: slideUp 0.8s ease 0.3s forwards;
+    }
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .page-header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #1D2128;
+    }
+    .page-header h1 i {
+      color: #408175;
+    }
+    .page-header p {
+      color: #1D2128;
+      opacity: 0.6;
+      font-size: 1.1rem;
+      margin-top: 0.3rem;
+    }
+
+    .content-card {
+      background: #FFFFFF;
+      border-radius: 36px;
+      padding: 2.5rem 2.8rem;
+      border: 2px solid #1D2128;
+      opacity: 0;
+      animation: cardFade 0.7s ease 0.4s forwards;
+    }
+    @keyframes cardFade {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .content-card h2 {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #408175;
+    }
+    .content-card h2 i {
+      color: #408175;
+    }
+    .content-card p {
+      color: #1D2128;
+      opacity: 0.8;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .content-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .content-card ul li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(64, 129, 117, 0.1);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      color: #1D2128;
+      opacity: 0.85;
+    }
+    .content-card ul li i {
+      color: #408175;
+      width: 1.6rem;
+      text-align: center;
+      margin-top: 0.2rem;
+    }
+    .content-card .highlight {
+      color: #408175;
+      font-weight: 600;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.5rem;
+      color: #1D2128;
+      opacity: 0.6;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .back-link:hover {
+      color: #408175;
+      border-bottom-color: #408175;
+      opacity: 1;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 4rem;
+      opacity: 0.4;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      color: #1D2128;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 1.2rem 3rem;
+      }
+      .nav-bar {
+        padding: 0.8rem 1.2rem;
+        margin: 0 -1.2rem;
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
+        justify-content: center;
+      }
+      .content-card {
+        padding: 1.8rem 1.5rem;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline id="bgVideo">
+    <source src="backgoundvideo.mp4" type="video/mp4" />
+  </video>
+  <div class="bg-overlay"></div>
+
+  <div class="container">
+    <nav class="nav-bar">
+      <div class="logo"><i class="fas fa-crown"></i> Liam.G</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="process.html">Process</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Say Hello!</a>
+    </nav>
+
+    <div class="page-header">
+      <h1><i class="fas fa-route"></i> My Process</h1>
+      <p>How I turn ideas into working solutions.</p>
+    </div>
+
+    <div class="content-card">
+      <h2><i class="fas fa-project-diagram"></i> From Concept to Code</h2>
+      <p>
+        I follow a structured yet flexible approach to ensure quality and alignment with user needs.
+        My process is built on <span class="highlight">research, iteration, and user-centric design</span>.
+      </p>
+
+      <ul>
+        <li><i class="fas fa-search"></i> <strong>Research &amp; Discovery</strong> — Understand the problem, user needs, and technical constraints. I dig deep into requirements and explore existing solutions.</li>
+        <li><i class="fas fa-pencil-ruler"></i> <strong>Wireframing &amp; Design</strong> — Sketch user flows, create low-fidelity wireframes, and design clean, intuitive UI mockups using tools like Figma and Canva.</li>
+        <li><i class="fas fa-code"></i> <strong>Development</strong> — Build with modern stacks: <span class="highlight">HTML, CSS, JS, PHP, Python, Firebase, MySQL</span>, and Arduino for IoT. I write clean, maintainable code.</li>
+        <li><i class="fas fa-vial"></i> <strong>Testing &amp; QA</strong> — Rigorous testing across devices and scenarios to catch issues early. I perform both manual and automated testing.</li>
+        <li><i class="fas fa-sync-alt"></i> <strong>Iterate &amp; Deploy</strong> — Gather feedback, refine based on user insights, and deliver a polished, performant product. I use CI/CD workflows where possible.</li>
+      </ul>
+
+      <p style="margin-top:1.2rem;">
+        I believe in <span class="highlight">clean code, clear communication, and continuous improvement</span>.
+        Whether it's a web app, an IoT dashboard, or a publication material, I ensure every detail serves the end user.
+      </p>
+
+      <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+    </div>
+
+    <div class="footer-note">
+      <i class="fas fa-crown" style="color:#408175;"></i> Liam Gabriel D. Bayot · built with purpose
+    </div>
+  </div>
+</body>
+</html>
